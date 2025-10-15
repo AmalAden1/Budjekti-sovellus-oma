@@ -1,0 +1,17 @@
+﻿
+
+footer {
+    padding-top: 200px;
+    padding-bottom: 200px;
+    background-size: cover;
+    background-image: url('../kuvat/euro-870757_1280.jpg');
+    background-position: center center;
+    background-repeat: no-repeat no-repeat;
+    margin: auto;
+}
+
+
+img {
+    padding-right: 20%;
+    padding-left: 20%;
+}

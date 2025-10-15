@@ -1,0 +1,48 @@
+﻿@*Kirjautumisen rajaus näkymät/ actionlink mitä näky uloskijautuneen*@
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <div class="container">
+        @Html.ActionLink("Budjetti", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <a class="navbar-brand" href="#">[@ViewBag.LoggedStatus]</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li>@Html.ActionLink("Etusivu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Info", "Info", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Yhteystiedot", "Yhteystiedot", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                @*<li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+
+                @*//Kommentissa oleva ""Login modal"" ikkuna navbarissa eli yläpalkissa*@
+                @*<li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Login Modal</a></li>*@
+
+                <li>
+                    @if (Session["UserName"] != null)
+                    {
+                        <a href="#" class="nav-link">Logged user: @Session["UserName"]</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+                    }
+                </li>
+
+                <li>
+                    @if (Session["UserName"] == null)
+                    {
+                        <a href="#" class="nav-link">()</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })
+                    }
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+

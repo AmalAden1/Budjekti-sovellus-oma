@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="196a70300076448c8f6f87d8abe1eec5" Name="Diagram1">
+        <EntityTypeShape EntityType="BudjettiDBModel.Asiakas" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BudjettiDBModel.Login" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BudjettiDBModel.Menolajit" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BudjettiDBModel.Menot" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BudjettiDBModel.Tulolajit" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BudjettiDBModel.Tulot" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BudjettiDBModel.FK_Menot_Asiakas" ManuallyRouted="false" />
+        <AssociationConnector Association="BudjettiDBModel.FK_Tulot_Asiakas" ManuallyRouted="false" />
+        <AssociationConnector Association="BudjettiDBModel.FK_Menot_Menolajit" ManuallyRouted="false" />
+        <AssociationConnector Association="BudjettiDBModel.FK_Tulolajit_Tulolajit" ManuallyRouted="false" />
+        <AssociationConnector Association="BudjettiDBModel.FK_Tulot_Tulolajit" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

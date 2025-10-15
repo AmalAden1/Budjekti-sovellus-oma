@@ -1,0 +1,59 @@
+﻿@model BudjettI.Models.Tulot
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<center>
+
+    <h3>Olet poistamassa kyseisen tulon. Oletko varma tästä?</h3>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PVM)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PVM)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Maara)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Maara)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asiakas.Etunimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asiakas.Etunimi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tulolajit.Nimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tulolajit.Nimi)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Poista" class="btn btn-default" /> |
+            @Html.ActionLink("Palaa alkuun", "Index")
+        </div>
+    }
+    </div>
+
+</center>

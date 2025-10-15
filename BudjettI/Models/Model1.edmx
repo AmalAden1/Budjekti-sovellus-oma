@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BudjektiBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asiakas">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Etunimi" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sukunimi" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sahkoposti" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nchar" MaxLength="50" />
+          <Property Name="LoginErrorMessage" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Menolajit">
+          <Key>
+            <PropertyRef Name="MenolajitID" />
+          </Key>
+          <Property Name="MenolajitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menot">
+          <Key>
+            <PropertyRef Name="MenotID" />
+          </Key>
+          <Property Name="MenotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AsiakasID" Type="int" Nullable="false" />
+          <Property Name="MenolajitID" Type="int" Nullable="false" />
+          <Property Name="PVM" Type="datetime" />
+          <Property Name="Maara" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tulolajit">
+          <Key>
+            <PropertyRef Name="TulolajitID" />
+          </Key>
+          <Property Name="TulolajitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tulot">
+          <Key>
+            <PropertyRef Name="TulotID" />
+          </Key>
+          <Property Name="TulotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AsiakasID" Type="int" Nullable="false" />
+          <Property Name="TulolajitID" Type="int" Nullable="false" />
+          <Property Name="PVM" Type="datetime" />
+          <Property Name="Maara" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Menot_Asiakas">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Menot" Type="Self.Menot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Menot">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menot_Menolajit">
+          <End Role="Menolajit" Type="Self.Menolajit" Multiplicity="1" />
+          <End Role="Menot" Type="Self.Menot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menolajit">
+              <PropertyRef Name="MenolajitID" />
+            </Principal>
+            <Dependent Role="Menot">
+              <PropertyRef Name="MenolajitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tulot_Asiakas">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Tulot" Type="Self.Tulot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Tulot">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tulot_Tulolajit">
+          <End Role="Tulolajit" Type="Self.Tulolajit" Multiplicity="1" />
+          <End Role="Tulot" Type="Self.Tulot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulolajit">
+              <PropertyRef Name="TulolajitID" />
+            </Principal>
+            <Dependent Role="Tulot">
+              <PropertyRef Name="TulolajitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BudjektiBDModelStoreContainer">
+          <EntitySet Name="Asiakas" EntityType="Self.Asiakas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menolajit" EntityType="Self.Menolajit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menot" EntityType="Self.Menot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tulolajit" EntityType="Self.Tulolajit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tulot" EntityType="Self.Tulot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Menot_Asiakas" Association="Self.FK_Menot_Asiakas">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Menot" EntitySet="Menot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menot_Menolajit" Association="Self.FK_Menot_Menolajit">
+            <End Role="Menolajit" EntitySet="Menolajit" />
+            <End Role="Menot" EntitySet="Menot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tulot_Asiakas" Association="Self.FK_Tulot_Asiakas">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Tulot" EntitySet="Tulot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tulot_Tulolajit" Association="Self.FK_Tulot_Tulolajit">
+            <End Role="Tulolajit" EntitySet="Tulolajit" />
+            <End Role="Tulot" EntitySet="Tulot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BudjektiBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asiakas">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Sahkoposti" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Menot" Relationship="Self.FK_Menot_Asiakas" FromRole="Asiakas" ToRole="Menot" />
+          <NavigationProperty Name="Tulot" Relationship="Self.FK_Tulot_Asiakas" FromRole="Asiakas" ToRole="Tulot" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LoginErrorMessage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Menolajit">
+          <Key>
+            <PropertyRef Name="MenolajitID" />
+          </Key>
+          <Property Name="MenolajitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Menot" Relationship="Self.FK_Menot_Menolajit" FromRole="Menolajit" ToRole="Menot" />
+        </EntityType>
+        <EntityType Name="Menot">
+          <Key>
+            <PropertyRef Name="MenotID" />
+          </Key>
+          <Property Name="MenotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" />
+          <Property Name="MenolajitID" Type="Int32" Nullable="false" />
+          <Property Name="PVM" Type="DateTime" Precision="3" />
+          <Property Name="Maara" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Asiakas" Relationship="Self.FK_Menot_Asiakas" FromRole="Menot" ToRole="Asiakas" />
+          <NavigationProperty Name="Menolajit" Relationship="Self.FK_Menot_Menolajit" FromRole="Menot" ToRole="Menolajit" />
+        </EntityType>
+        <EntityType Name="Tulolajit">
+          <Key>
+            <PropertyRef Name="TulolajitID" />
+          </Key>
+          <Property Name="TulolajitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tulot" Relationship="Self.FK_Tulot_Tulolajit" FromRole="Tulolajit" ToRole="Tulot" />
+        </EntityType>
+        <EntityType Name="Tulot">
+          <Key>
+            <PropertyRef Name="TulotID" />
+          </Key>
+          <Property Name="TulotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" />
+          <Property Name="TulolajitID" Type="Int32" Nullable="false" />
+          <Property Name="PVM" Type="DateTime" Precision="3" />
+          <Property Name="Maara" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Asiakas" Relationship="Self.FK_Tulot_Asiakas" FromRole="Tulot" ToRole="Asiakas" />
+          <NavigationProperty Name="Tulolajit" Relationship="Self.FK_Tulot_Tulolajit" FromRole="Tulot" ToRole="Tulolajit" />
+        </EntityType>
+        <Association Name="FK_Menot_Asiakas">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Menot" Type="Self.Menot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Menot">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tulot_Asiakas">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Tulot" Type="Self.Tulot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Tulot">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menot_Menolajit">
+          <End Role="Menolajit" Type="Self.Menolajit" Multiplicity="1" />
+          <End Role="Menot" Type="Self.Menot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menolajit">
+              <PropertyRef Name="MenolajitID" />
+            </Principal>
+            <Dependent Role="Menot">
+              <PropertyRef Name="MenolajitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tulot_Tulolajit">
+          <End Role="Tulolajit" Type="Self.Tulolajit" Multiplicity="1" />
+          <End Role="Tulot" Type="Self.Tulot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulolajit">
+              <PropertyRef Name="TulolajitID" />
+            </Principal>
+            <Dependent Role="Tulot">
+              <PropertyRef Name="TulolajitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BudjektiBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiakas" EntityType="Self.Asiakas" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+          <EntitySet Name="Menolajit" EntityType="Self.Menolajit" />
+          <EntitySet Name="Menot" EntityType="Self.Menot" />
+          <EntitySet Name="Tulolajit" EntityType="Self.Tulolajit" />
+          <EntitySet Name="Tulot" EntityType="Self.Tulot" />
+          <AssociationSet Name="FK_Menot_Asiakas" Association="Self.FK_Menot_Asiakas">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Menot" EntitySet="Menot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tulot_Asiakas" Association="Self.FK_Tulot_Asiakas">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Tulot" EntitySet="Tulot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menot_Menolajit" Association="Self.FK_Menot_Menolajit">
+            <End Role="Menolajit" EntitySet="Menolajit" />
+            <End Role="Menot" EntitySet="Menot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tulot_Tulolajit" Association="Self.FK_Tulot_Tulolajit">
+            <End Role="Tulolajit" EntitySet="Tulolajit" />
+            <End Role="Tulot" EntitySet="Tulot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BudjektiBDModelStoreContainer" CdmEntityContainer="BudjektiBDEntities">
+          <EntitySetMapping Name="Asiakas">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Asiakas">
+              <MappingFragment StoreEntitySet="Asiakas">
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Sahkoposti" ColumnName="Sahkoposti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="LoginErrorMessage" ColumnName="LoginErrorMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menolajit">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Menolajit">
+              <MappingFragment StoreEntitySet="Menolajit">
+                <ScalarProperty Name="MenolajitID" ColumnName="MenolajitID" />
+                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menot">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Menot">
+              <MappingFragment StoreEntitySet="Menot">
+                <ScalarProperty Name="MenotID" ColumnName="MenotID" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="MenolajitID" ColumnName="MenolajitID" />
+                <ScalarProperty Name="PVM" ColumnName="PVM" />
+                <ScalarProperty Name="Maara" ColumnName="Maara" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tulolajit">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Tulolajit">
+              <MappingFragment StoreEntitySet="Tulolajit">
+                <ScalarProperty Name="TulolajitID" ColumnName="TulolajitID" />
+                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tulot">
+            <EntityTypeMapping TypeName="BudjektiBDModel.Tulot">
+              <MappingFragment StoreEntitySet="Tulot">
+                <ScalarProperty Name="TulotID" ColumnName="TulotID" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="TulolajitID" ColumnName="TulolajitID" />
+                <ScalarProperty Name="PVM" ColumnName="PVM" />
+                <ScalarProperty Name="Maara" ColumnName="Maara" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

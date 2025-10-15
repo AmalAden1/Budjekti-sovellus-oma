@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Budjetti</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+
+
+
+    @*Kirjautumisrajaamis koodi muista tehdä -Nav*@
+
+    @{
+        if (Session["UserName"] == null)
+        {
+            Html.RenderPartial("_NavBarLoggedOut");
+
+        }
+        else
+        {
+            Html.RenderPartial("_NavBarLoggedIn");
+            
+        }
+
+    }
+
+    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                @Html.ActionLink("Budjetti", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Etusivu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Info", "Info", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Yhteystiedot", "Yhteystiedot", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        
+                        <li>@Html.ActionLink("Kirjaa tulot", "Index", "Tulot", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Kirjaa menot", "Index", "Menot", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+    <hr />
+
+
+
+    @*Sivun alaosassa näkyvä käyttäjätieto ja päivämäärä*@
+    <div class="container-fluid">
+        @RenderBody()
+        <hr />
+        <footer class="oma-footer">
+
+
+            @using System.Globalization
+            @{
+                string LoggedStatus = "";
+                if (Session["Sahkoposti"] == null)
+                {
+                    LoggedStatus = "et ole kirjautunut järjestelmään";
+                }
+                else
+                {
+                    LoggedStatus = "olet kirjautunut sähköpostilla " + Session["Sahkoposti"];
+                }
+            }
+
+
+        </footer>
+
+        <center>
+
+            <p>&copy; Budjetti-sovellus, @LoggedStatus, tänään on @DateTime.Today.ToString("D", CultureInfo.CreateSpecificCulture("fi-FI"))</p>
+
+        </center>
+
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+
+</html>

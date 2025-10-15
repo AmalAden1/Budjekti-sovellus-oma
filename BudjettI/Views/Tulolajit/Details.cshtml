@@ -1,0 +1,27 @@
+﻿@model BudjettI.Models.Tulolajit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<center>
+
+    <div>
+        <h2>Lisätietoja tulolajeista</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nimi)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Muokkaa", "Edit", new { id = Model.TulolajitID }) |
+        @Html.ActionLink("Palaa alkuun", "Index")
+    </p>
+</center>

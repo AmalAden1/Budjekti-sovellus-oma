@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BudjettI.Models.Asiakas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Asiakas</h2>
+
+<p>
+    @Html.ActionLink("Luo Uusi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Etunimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sukunimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sahkoposti)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etunimi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sukunimi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sahkoposti)
+            </td>
+            <td>
+                @Html.ActionLink("Muokkaa", "Edit", new { id = item.AsiakasID }) |
+                @Html.ActionLink("Lisätiedot", "Details", new { id = item.AsiakasID }) |
+                @Html.ActionLink("Poista", "Delete", new { id = item.AsiakasID })
+            </td>
+        </tr>
+    }
+
+</table>

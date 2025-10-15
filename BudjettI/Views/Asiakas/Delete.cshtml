@@ -1,0 +1,50 @@
+﻿@model BudjettI.Models.Asiakas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<center>
+
+    <h3>Olet poistamassa asiakasta. Haluatko varmasti poistaa tämän?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Etunimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Etunimi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sukunimi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sukunimi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sahkoposti)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sahkoposti)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Poista" class="btn btn-default" /> |
+                @Html.ActionLink("Palaa alkuun", "Index")
+            </div>
+        }
+    </div>
+
+</center>
