@@ -1,5 +1,4 @@
-﻿
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
     <div class="container">
         @Html.ActionLink("Budjetti", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         <a class="navbar-brand" href="#">[@ViewBag.LoggedStatus]</a>
@@ -19,6 +18,7 @@
 
                 <li>@Html.ActionLink("Kirjaa tulot", "Index", "Tulot", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Kirjaa menot", "Index", "Menot", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Tasapaino", "Index", "Balance", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,40 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tulot, Menot ja Tasapaino</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Yhteensä tulot:</strong> @String.Format("{0:N2}", ViewBag.TotalIncome) €</p>
+        <p><strong>Yhteensä menot:</strong> @String.Format("{0:N2}", ViewBag.TotalExpense) €</p>
+        <p><strong>Tasapaino:</strong> <span style="font-weight:bold;">@String.Format("{0:N2}", ViewBag.Balance) €</span></p>
+    </div>
+</div>
+
+<canvas id="balanceChart" width="600" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var income = [@ViewBag.TotalIncome];
+    var expense = [@ViewBag.TotalExpense];
+    var ctx = document.getElementById('balanceChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tulot', 'Menot'],
+            datasets: [{
+                label: 'Summa (€)',
+                data: [@ViewBag.TotalIncome, @ViewBag.TotalExpense],
+                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

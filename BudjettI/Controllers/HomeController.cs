@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Login = BudjettI.Models.Login;
 
+
+// toimiva versio 
 namespace BudjettI.Controllers
 {
     public class HomeController : Controller
